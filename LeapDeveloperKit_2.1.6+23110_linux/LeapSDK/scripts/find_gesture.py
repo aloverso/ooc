@@ -15,35 +15,97 @@ class SampleListener(Leap.Listener):
     def on_frame(self, controller):
         frame = controller.frame()
 
+        # state=0 is fist right
+        # state=1 is fist left
+        # state=2 is FRONT (low) splay right down
+        # state=3 is FRONT (low) splay right up
+        # state=4 is FRONT (low) splay left down
+        # state=5 is FRONT (low) splay left up
+        # state=6 is BACK (high) splay right down
+        # state=7 is BACK (high) splay right up
+        # state=8 is BACK (high) splay left down
+        # state=9 is BACK (high) splay left up
+
         hand = frame.hands[0]
 
+
+        #Figure out left or right hand
         handType = "Left hand" if hand.is_left else "Right hand"
         #print "  %s, id %d, position: %s" % (
             #handType, hand.id, hand.palm_position)
 
+
         # Get the hand's normal vector and direction
         normal = hand.palm_normal
-        #print normal
         direction = hand.direction
 
-        state = 0
 
+        state = 0
+        fistOrSplayed = 1
+        leftOrRight = 0
+        upOrDown = 0
+
+        #figure out high or low
+        if hand.palm_position[1]>150.0:
+            elevation = 1 #high 
+        else:
+            elevation = 0
+
+        print "elevation",elevation
+
+        #figure out palm up or down
+        if hand.palm_normal[1]>0.0:
+            upOrDown = 1
+        else:
+            upOrDown = 0
+
+        print "upOrDown",upOrDown
+
+        #fist or splayed
         for finger in hand.fingers:
             if finger.direction.angle_to(direction) > 1.5:
-                state = 1 #fist
-            else:
-                state = 2 #splayed = True
-        if state == 1:
-            print handType,"fist"
+                fistOrSplayed = 1 #fist
+            else:  
+                fistOrSplayed = 0 #splayed
 
-        elif state == 2:
-            if hand.palm_normal[1]>0.0:
-                print handType,"up and splayed"
-            else:
-                print handType, "down and splayed"
+        print "fistOrSplayed",fistOrSplayed
+
+        if handType == "Left hand":
+            leftOrRight = 1 #left
         else:
-            state = 0
+            leftOrRight = 0 #right
 
+        print "leftOrRight",leftOrRight
+
+        if fistOrSplayed == 1: #fists
+            if leftOrRight == 0: #right fist
+                state = 0
+            if leftOrRight == 1: #left fist
+                state = 1
+
+        if fistOrSplayed == 0: #splay
+            if leftOrRight== 0: #right splay
+                if upOrDown == 0 and elevation == 0: #down and low
+                    state = 2
+                if upOrDown == 1 and elevation == 0: #up and low
+                    state = 3
+                if upOrDown == 0 and elevation == 1: #down and high
+                    state = 6
+                if upOrDown == 1 and elevation == 1: #up and high
+                    state = 7
+        
+            if leftOrRight == 1: #left splay
+                if upOrDown == 0 and elevation == 0: #down and low
+                    state = 4
+                if upOrDown == 1 and elevation == 0: #up and low
+                    state = 5
+                if upOrDown == 0 and elevation == 1: #down and high
+                    state = 8
+                if upOrDown == 1 and elevation == 1: #up and high
+                    state = 9
+
+        print state
+        #return state
 
 
 def main():
