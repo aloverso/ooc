@@ -18,21 +18,32 @@ class SampleListener(Leap.Listener):
         hand = frame.hands[0]
 
         handType = "Left hand" if hand.is_left else "Right hand"
+        #print "  %s, id %d, position: %s" % (
+            #handType, hand.id, hand.palm_position)
 
         # Get the hand's normal vector and direction
         normal = hand.palm_normal
         #print normal
         direction = hand.direction
 
-        splayed = True
+        state = 0
 
         for finger in hand.fingers:
             if finger.direction.angle_to(direction) > 1.5:
-                splayed = False
-        if splayed:
-            print handType,"splayed"
-        else:
+                state = 1 #fist
+            else:
+                state = 2 #splayed = True
+        if state == 1:
             print handType,"fist"
+
+        elif state == 2:
+            if hand.palm_normal[1]>0.0:
+                print handType,"up and splayed"
+            else:
+                print handType, "down and splayed"
+        else:
+            state = 0
+
 
 
 def main():
