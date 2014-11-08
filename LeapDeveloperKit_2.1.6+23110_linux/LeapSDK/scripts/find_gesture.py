@@ -5,6 +5,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(src_dir, arch_dir)))
 
 import Leap
 from Leap import CircleGesture, KeyTapGesture, ScreenTapGesture, SwipeGesture
+import pygame
+import time
 
 class SampleListener(Leap.Listener):
 
@@ -107,6 +109,64 @@ class SampleListener(Leap.Listener):
         print state
         #return state
 
+        if state==2:
+            if violin not in sounds:
+                sounds.append(violin)
+                violin.play()
+        elif state==3:
+            if cello not in sounds:
+                sounds.append(cello)
+                cello.play()
+        elif state==4:
+            if harp not in sounds:
+                sounds.append(harp)
+                harp.play()        
+        elif state==5:
+            if timpani not in sounds:
+                sounds.append(timpani)
+                timpani.play()        
+        elif state==6:
+            if trumpet not in sounds:
+                sounds.append(trumpet)
+                trumpet.play()        
+        elif state==7:
+            if trombone not in sounds:
+                sounds.append(trombone)
+                trombone.play()
+        elif state==8:
+            if flute not in sounds:
+                sounds.append(flute)
+                flute.play()
+        elif state==9:
+            if piano not in sounds:
+                sounds.append(piano)
+                piano.play()
+        elif state==0:
+            if violin in sounds:
+                sounds.remove(violin)
+                violin.stop()
+            if cello in sounds:
+                sounds.remove(cello)
+                cello.stop()
+            if trumpet in sounds:
+                sounds.remove(trumpet)
+                trumpet.stop()
+            if trombone in sounds:
+                sounds.remove(trombone)
+                trombone.stop()
+        elif state==1:
+            if harp in sounds:
+                sounds.remove(harp)
+                harp.stop()
+            if timpani in sounds:
+                sounds.remove(timpani)
+                timpani.stop()
+            if flute in sounds:
+                sounds.remove(flute)
+                flute.stop()
+            if piano in sounds:
+                sounds.remove(piano)
+                piano.stop()
 
 def main():
     # Create a sample listener and controller
@@ -127,4 +187,20 @@ def main():
         controller.remove_listener(listener)
 
 if __name__ == "__main__":
+    freq = 44100    # audio CD quality
+    bitsize = -16   # unsigned 16 bit
+    channels = 2    # 1 is mono, 2 is stereo
+    buffer = 1024    # number of samples
+    pygame.mixer.init(freq, bitsize, channels, buffer)
+    pygame.mixer.music.set_volume(0.8)
+    sounds = []
+    violin = pygame.mixer.Sound('./instr/violin.wav')
+    trumpet = pygame.mixer.Sound('./instr/trumpet.wav')
+    cello = pygame.mixer.Sound('./instr/cello.wav')
+    harp = pygame.mixer.Sound('./instr/harp.wav')
+    trombone = pygame.mixer.Sound('./instr/trombone.wav')
+    piano = pygame.mixer.Sound('./instr/piano.wav')
+    flute = pygame.mixer.Sound('./instr/flute.wav')
+    timpani = pygame.mixer.Sound('./instr/timpani.wav')
+
     main()
