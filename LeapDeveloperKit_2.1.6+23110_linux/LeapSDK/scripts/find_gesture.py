@@ -121,9 +121,9 @@ class SampleListener(Leap.Listener):
                 sounds.append(harp)
                 harp.play(loops=10)        
         elif state==5:
-            if timpani not in sounds:
-                sounds.append(timpani)
-                timpani.play(loops=10)        
+            if drums not in sounds:
+                sounds.append(drums)
+                drums.play(loops=10)        
         elif state==6:
             if trumpet not in sounds:
                 sounds.append(trumpet)
@@ -157,9 +157,9 @@ class SampleListener(Leap.Listener):
             if harp in sounds:
                 sounds.remove(harp)
                 harp.stop()
-            if timpani in sounds:
-                sounds.remove(timpani)
-                timpani.stop()
+            if drums in sounds:
+                sounds.remove(drums)
+                drums.stop()
             if flute in sounds:
                 sounds.remove(flute)
                 flute.stop()
@@ -208,3 +208,4 @@ if __name__ == "__main__":
 
     # main()
     test_serial()
+
