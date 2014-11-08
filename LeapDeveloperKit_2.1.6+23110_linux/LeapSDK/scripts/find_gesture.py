@@ -120,9 +120,9 @@ class SampleListener(Leap.Listener):
                 sounds.append(harp)
                 harp.play(loops=10)        
         elif state==5:
-            if timpani not in sounds:
-                sounds.append(timpani)
-                timpani.play(loops=10)        
+            if drums not in sounds:
+                sounds.append(drums)
+                drums.play(loops=10)        
         elif state==6:
             if trumpet not in sounds:
                 sounds.append(trumpet)
@@ -156,9 +156,9 @@ class SampleListener(Leap.Listener):
             if harp in sounds:
                 sounds.remove(harp)
                 harp.stop()
-            if timpani in sounds:
-                sounds.remove(timpani)
-                timpani.stop()
+            if drums in sounds:
+                sounds.remove(drums)
+                drums.stop()
             if flute in sounds:
                 sounds.remove(flute)
                 flute.stop()
@@ -193,13 +193,13 @@ if __name__ == "__main__":
     pygame.mixer.init(freq, bitsize, channels, buffer)
     pygame.mixer.music.set_volume(0.8)
     sounds = []
-    violin = pygame.mixer.Sound('./instr/violin.wav')
-    trumpet = pygame.mixer.Sound('./instr/trumpet.wav')
-    cello = pygame.mixer.Sound('./instr/cello.wav')
-    harp = pygame.mixer.Sound('./instr/harp.wav')
-    trombone = pygame.mixer.Sound('./instr/trombone.wav')
-    piano = pygame.mixer.Sound('./instr/piano.wav')
-    flute = pygame.mixer.Sound('./instr/flute.wav')
-    timpani = pygame.mixer.Sound('./instr/timpani.wav')
+    violin = pygame.mixer.Sound('./instr/violin2cut.wav')
+    trumpet = pygame.mixer.Sound('./instr/trumpet2cut.wav')
+    cello = pygame.mixer.Sound('./instr/cello2cut.wav')
+    harp = pygame.mixer.Sound('./instr/harp2cut.wav')
+    trombone = pygame.mixer.Sound('./instr/trombone2cut.wav')
+    piano = pygame.mixer.Sound('./instr/piano2cut.wav')
+    flute = pygame.mixer.Sound('./instr/flute2cut.wav')
+    drums = pygame.mixer.Sound('./instr/drums2cut.wav')
 
     main()
