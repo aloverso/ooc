@@ -171,7 +171,7 @@ class SampleListener(Leap.Listener):
 
 def send(state):
     ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
-    ser.write(str(bin(state)))
+    ser.write(str(bin(state)+'@'))
 
 def main():
     # Create a sample listener and controller
