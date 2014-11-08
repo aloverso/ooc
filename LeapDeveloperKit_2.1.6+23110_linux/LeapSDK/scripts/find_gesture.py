@@ -106,7 +106,7 @@ class SampleListener(Leap.Listener):
                     state = 9
 
         print state
-        #return state
+        send(state)
 
         if state==2:
             if violin not in sounds:
@@ -167,9 +167,12 @@ class SampleListener(Leap.Listener):
                 sounds.remove(piano)
                 piano.stop()
 
-def test_serial():
+
+
+def send(state):
     ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
-    ser.write('Hi')
+    ser.write(str(bin(state)))
+
 def main():
     # Create a sample listener and controller
     listener = SampleListener()
@@ -207,5 +210,6 @@ if __name__ == "__main__":
     # timpani = pygame.mixer.Sound('./instr/timpani.wav')
 
     # main()
-    test_serial()
+    send(9)
+    send(10)
 
