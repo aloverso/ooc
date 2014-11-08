@@ -7,6 +7,7 @@ import Leap
 from Leap import CircleGesture, KeyTapGesture, ScreenTapGesture, SwipeGesture
 import pygame
 import time
+import serial
 
 class SampleListener(Leap.Listener):
 
@@ -166,6 +167,9 @@ class SampleListener(Leap.Listener):
                 sounds.remove(piano)
                 piano.stop()
 
+def test_serial():
+    ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+    ser.write('Hi')
 def main():
     # Create a sample listener and controller
     listener = SampleListener()
@@ -185,21 +189,22 @@ def main():
         controller.remove_listener(listener)
 
 if __name__ == "__main__":
-    state = 0
-    freq = 44100    # audio CD quality
-    bitsize = -16   # unsigned 16 bit
-    channels = 2    # 1 is mono, 2 is stereo
-    buffer = 1024    # number of samples
-    pygame.mixer.init(freq, bitsize, channels, buffer)
-    pygame.mixer.music.set_volume(0.8)
-    sounds = []
-    violin = pygame.mixer.Sound('./instr/violin.wav')
-    trumpet = pygame.mixer.Sound('./instr/trumpet.wav')
-    cello = pygame.mixer.Sound('./instr/cello.wav')
-    harp = pygame.mixer.Sound('./instr/harp.wav')
-    trombone = pygame.mixer.Sound('./instr/trombone.wav')
-    piano = pygame.mixer.Sound('./instr/piano.wav')
-    flute = pygame.mixer.Sound('./instr/flute.wav')
-    timpani = pygame.mixer.Sound('./instr/timpani.wav')
+    # state = 0
+    # freq = 44100    # audio CD quality
+    # bitsize = -16   # unsigned 16 bit
+    # channels = 2    # 1 is mono, 2 is stereo
+    # buffer = 1024    # number of samples
+    # pygame.mixer.init(freq, bitsize, channels, buffer)
+    # pygame.mixer.music.set_volume(0.8)
+    # sounds = []
+    # violin = pygame.mixer.Sound('./instr/violin.wav')
+    # trumpet = pygame.mixer.Sound('./instr/trumpet.wav')
+    # cello = pygame.mixer.Sound('./instr/cello.wav')
+    # harp = pygame.mixer.Sound('./instr/harp.wav')
+    # trombone = pygame.mixer.Sound('./instr/trombone.wav')
+    # piano = pygame.mixer.Sound('./instr/piano.wav')
+    # flute = pygame.mixer.Sound('./instr/flute.wav')
+    # timpani = pygame.mixer.Sound('./instr/timpani.wav')
 
-    main()
+    # main()
+    test_serial()
