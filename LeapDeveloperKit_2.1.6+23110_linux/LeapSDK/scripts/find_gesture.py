@@ -112,35 +112,35 @@ class SampleListener(Leap.Listener):
         if state==2:
             if violin not in sounds:
                 sounds.append(violin)
-                violin.play()
+                violin.play(loops=10)
         elif state==3:
             if cello not in sounds:
                 sounds.append(cello)
-                cello.play()
+                cello.play(loops=10)
         elif state==4:
             if harp not in sounds:
                 sounds.append(harp)
-                harp.play()        
+                harp.play(loops=10)        
         elif state==5:
             if timpani not in sounds:
                 sounds.append(timpani)
-                timpani.play()        
+                timpani.play(loops=10)        
         elif state==6:
             if trumpet not in sounds:
                 sounds.append(trumpet)
-                trumpet.play()        
+                trumpet.play(loops=10)        
         elif state==7:
             if trombone not in sounds:
                 sounds.append(trombone)
-                trombone.play()
+                trombone.play(loops=10)
         elif state==8:
             if flute not in sounds:
                 sounds.append(flute)
-                flute.play()
+                flute.play(loops=10)
         elif state==9:
             if piano not in sounds:
                 sounds.append(piano)
-                piano.play()
+                piano.play(loops=10)
         elif state==0:
             if violin in sounds:
                 sounds.remove(violin)
