@@ -19,31 +19,20 @@ class SampleListener(Leap.Listener):
 
         handType = "Left hand" if hand.is_left else "Right hand"
 
-        print "  %s, id %d, position: %s" % (
-            handType, hand.id, hand.palm_position)
-
         # Get the hand's normal vector and direction
         normal = hand.palm_normal
-        print normal
+        #print normal
         direction = hand.direction
 
-        # Calculate the hand's pitch, roll, and yaw angles
-        # print "  pitch: %f degrees, roll: %f degrees, yaw: %f degrees" % (
-        #     direction.pitch * Leap.RAD_TO_DEG,
-        #     normal.roll * Leap.RAD_TO_DEG,
-        #     direction.yaw * Leap.RAD_TO_DEG)
+        splayed = True
 
-        # Get arm bone
-        # arm = hand.arm
-        # print "  Arm direction: %s, wrist position: %s, elbow position: %s" % (
-        #     arm.direction,
-        #     arm.wrist_position,
-        #     arm.elbow_position)
-
-        # Get fingers
         for finger in hand.fingers:
-            pass
-            #print finger.direction
+            if finger.direction.angle_to(direction) > 1.5:
+                splayed = False
+        if splayed:
+            print handType,"splayed"
+        else:
+            print handType,"fist"
 
 
 def main():
