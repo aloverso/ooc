@@ -106,7 +106,8 @@ class SampleListener(Leap.Listener):
                     state = 9
 
         print state
-        send(state)
+        ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+        ser.write(str(state)+'@')
 
         if state==2:
             if violin not in sounds:
@@ -168,11 +169,6 @@ class SampleListener(Leap.Listener):
                 piano.stop()
 
 
-
-def send(state):
-    ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
-    ser.write(str(bin(state)+'@'))
-
 def main():
     # Create a sample listener and controller
     listener = SampleListener()
@@ -192,24 +188,21 @@ def main():
         controller.remove_listener(listener)
 
 if __name__ == "__main__":
-    # state = 0
-    # freq = 44100    # audio CD quality
-    # bitsize = -16   # unsigned 16 bit
-    # channels = 2    # 1 is mono, 2 is stereo
-    # buffer = 1024    # number of samples
-    # pygame.mixer.init(freq, bitsize, channels, buffer)
-    # pygame.mixer.music.set_volume(0.8)
-    # sounds = []
-    # violin = pygame.mixer.Sound('./instr/violin.wav')
-    # trumpet = pygame.mixer.Sound('./instr/trumpet.wav')
-    # cello = pygame.mixer.Sound('./instr/cello.wav')
-    # harp = pygame.mixer.Sound('./instr/harp.wav')
-    # trombone = pygame.mixer.Sound('./instr/trombone.wav')
-    # piano = pygame.mixer.Sound('./instr/piano.wav')
-    # flute = pygame.mixer.Sound('./instr/flute.wav')
-    # timpani = pygame.mixer.Sound('./instr/timpani.wav')
+    state = 0
+    freq = 44100    # audio CD quality
+    bitsize = -16   # unsigned 16 bit
+    channels = 2    # 1 is mono, 2 is stereo
+    buffer = 1024    # number of samples
+    pygame.mixer.init(freq, bitsize, channels, buffer)
+    pygame.mixer.music.set_volume(0.8)
+    sounds = []
+    violin = pygame.mixer.Sound('./instr/violin2cut.wav')
+    trumpet = pygame.mixer.Sound('./instr/trumpet2cut.wav')
+    cello = pygame.mixer.Sound('./instr/cello2cut.wav')
+    harp = pygame.mixer.Sound('./instr/harp2cut.wav')
+    trombone = pygame.mixer.Sound('./instr/trombone2cut.wav')
+    piano = pygame.mixer.Sound('./instr/piano2cut.wav')
+    flute = pygame.mixer.Sound('./instr/flute2cut.wav')
+    drums = pygame.mixer.Sound('./instr/drums2cut.wav')
 
-    # main()
-    send(9)
-    send(10)
-
+    main()
