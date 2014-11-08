@@ -41,8 +41,6 @@ class SampleListener(Leap.Listener):
         normal = hand.palm_normal
         direction = hand.direction
 
-
-        state = 0
         fistOrSplayed = 1
         leftOrRight = 0
         upOrDown = 0
@@ -187,6 +185,7 @@ def main():
         controller.remove_listener(listener)
 
 if __name__ == "__main__":
+    state = 0
     freq = 44100    # audio CD quality
     bitsize = -16   # unsigned 16 bit
     channels = 2    # 1 is mono, 2 is stereo
