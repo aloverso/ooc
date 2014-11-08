@@ -51,7 +51,7 @@ class Model:
             self.botmidright = self.botmidright_inact #3
             self.botfarright = self.botfarright_inact #2
         if state==1:
-            self.topfarleft = self.topmidleft_inact #8
+            self.topfarleft = self.topfarleft_inact #8
             self.topmidleft = self.topmidleft_inact #9
             self.botfarleft = self.botfarleft_inact #4
             self.botmidleft = self.botmidleft_inact #5
